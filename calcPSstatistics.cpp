@@ -4,9 +4,7 @@
 //Expectation
 double ex(Mat Statistic)
 {
-	double size = Statistic.cols * Statistic.rows;
-	double expectation = sum(Statistic)[0] / size;
-	return expectation;
+	return cv::mean(Statistic)[0];
 }
 
 //Marginal
@@ -29,10 +27,10 @@ void Marginal::setSkewKurt()
 	Mat third, fourth;
 	//skew
 	pow(img, 3, third);
-	skew = sum(third)[0] / size;
+	skew = cv::mean(third)[0];
 	//kurt
 	pow(img, 4, fourth);
-	kurt = sum(fourth)[0] / size;
+	kurt = cv::mean(fourth)[0];
 }
 double Marginal::getMin()
 {
@@ -78,17 +76,15 @@ Marginal::Marginal(Mat src, Mode id)
 	}
 	else
 	{
-		cout << "フッ、私は不必要なようだな..." << endl;
+		cout << "input ORG, HR or LR" << endl;
 	}
 }
 
+//Spectral
 double Spectral(Mat mg)
 {
-	Scalar m, sd;
-	meanStdDev(mg, m,sd);
-	return m[0];
+	return cv::mean(mg)[0];
 }
-
 
 //Linear Position & Energy Position
 Mat calcAC(Mat img,int N) 
