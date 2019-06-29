@@ -10,7 +10,6 @@ constexpr int ORIENT = 2;
 //scale is natural number upto SCALE
 //orient is natural number upto ORIENT
 
-
 int main() {
 	
 	Mat src(200, 200, CV_32FC1, Scalar::all(0));
@@ -22,12 +21,22 @@ int main() {
 	Mat img = imread("wood.png", IMREAD_GRAYSCALE);
 	img.convertTo(img, CV_32FC1);
 	resize(img, img, Size(),0.4, 0.4);
-	cout << img.size() << endl;
+	imshow("original", img);
 
 	SteerablePyramid pyr(img, SCALE, ORIENT);
 	Mat out;
 	pyr.decompose();
 	pyr.setMag();
+
+	//Marginal
+	Marginal org(img, ORG);
+	cout << "mean = " << org.getMean() << endl;
+	cout << "var = " << org.getVar() << endl;
+	cout << "sd = " << sqrt(org.getVar()) << endl;
+	cout << "skew = " << org.getSkew() << endl;
+	cout << "kurt = " << org.getKurt() << endl;
+	cout << "min = " << org.getMin() << endl;
+	cout << "max = " << org.getMax() << endl;
 
 	waitKey();
 	return 0;

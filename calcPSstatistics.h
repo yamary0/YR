@@ -1,6 +1,6 @@
 #pragma once
 
-//Šú‘Ò’l‚Í‚»‚ê‚¼‚ê‚ÌMat‚Ìmean‚ðŽæ‚ê‚Î‚æ‚¢
+//Šú‘Ò’l
 double ex(Mat Statistic);
 
 //Marginal
@@ -9,6 +9,7 @@ enum Mode {
 	HR,		//high pass residual
 	LR		//low pass residual
 };
+
 class Marginal {
 	protected:
 		Mat img;
@@ -34,7 +35,7 @@ class Marginal {
 
 double Spectral(Mat mg);					//Spectral ( mean of Magnitude )
 Mat calcAC(Mat img,int N);					//Linear Position & Energy Position ( Auto-Correlation )
-vector<Mat> calcLS(Mat scl1, Mat scl2);		//Linear Scale ( Reratice Phase )
+vector<Mat> calcLS(Mat scl1, Mat scl2);		//Linear Scale ( Rerative Phase )
 
 Mat calcXC_Ori(Mat ori1, Mat ori2);			//Energy Orientation ( Cross-Correlation )
 Mat calcXC_Sca(Mat sca1, Mat sca2);			//Energy Scale ( Cross-Correlation )

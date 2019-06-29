@@ -8,6 +8,7 @@ void visual(Mat img, String id)
 	colormap(img, 7);
 	imshow(id, img);
 }
+
  Mat MakeComplexMat(Mat img)
 {
 	Mat ComplexImg;
@@ -47,6 +48,16 @@ void visual(Mat img, String id)
  {
 	 Mat DS(ftimg, Rect(ftimg.cols / 2 - width / 2, ftimg.rows / 2 - hight / 2, width, hight));
 	 return DS;
+ }
+
+ void paste(Mat& dst, Mat src, int x, int y)
+ {
+
+	 int width = src.cols;
+	 int height = src.rows;
+
+	 Mat roi_dst = dst(Rect(x, y, width, height));
+	 src.copyTo(roi_dst);
  }
 
  void colormap(Mat &img,int n)
@@ -165,20 +176,12 @@ void SteerablePyramid::setMag()
 	for (int i = 0; i < BR_s.size(); ++i)
 	{
 		Mat Mag = abs(BR_s[i] - mean(BR_s[i])[0]);
-		Mag -= mean(Mag)[0];
+		//Mag -= mean(Mag)[0];
 
 		MB.emplace_back(Mag);
 	}
 }
-void paste(Mat &dst, Mat src, int x, int y) 
-{
 
-	int width = src.cols;
-	int height = src.rows;
-
-	Mat roi_dst = dst(Rect(x, y, width, height));
-	src.copyTo(roi_dst);
-}
 Mat SteerablePyramid::getALL(Domain mode)
 {
 	int col=0, row=0;
