@@ -3,8 +3,9 @@
 #include "calcPSstatistics.h"
 #include "adjustPSstatistics.h"
 
-constexpr int SCALE = 3;
-constexpr int ORIENT = 4;
+constexpr int SCALE = 2;
+constexpr int ORIENT = 2;
+
 //when you get a component of pyramid, you should select
 //scale is natural number upto SCALE
 //orient is natural number upto ORIENT

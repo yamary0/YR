@@ -1,2 +1,60 @@
-﻿  main.cpp
-  SteerablePyramid.vcxproj -> C:\Users\yamar\Documents\Visual Studio 2019\Project\SteerablePyramid\x64\Debug\SteerablePyramid.exe
+﻿  adjustPSstatistics.cpp
+  calcPSstatistics.cpp
+  filtergenerator.cpp
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\adjustPSstatistics.cpp(20,13): warning C4244:  '初期化中': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(46,20): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(46,17): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(46,25): warning C4244:  '=': 'double' から '_Tp' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(46,25): warning C4244:         with
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(46,25): warning C4244:         [
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(46,25): warning C4244:             _Tp=float
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(46,25): warning C4244:         ]
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(77,20): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(77,17): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(77,25): warning C4244:  '=': 'double' から '_Tp' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(77,25): warning C4244:         with
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(77,25): warning C4244:         [
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(77,25): warning C4244:             _Tp=float
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(77,25): warning C4244:         ]
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(101,21): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(101,18): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(106,21): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(106,18): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(115,21): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(115,18): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(115,26): warning C4244:  '=': 'double' から '_Tp' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(115,26): warning C4244:         with
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(115,26): warning C4244:         [
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(115,26): warning C4244:             _Tp=float
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(115,26): warning C4244:         ]
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(139,21): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(139,18): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(144,21): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(144,18): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(153,21): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(153,18): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(153,26): warning C4244:  '=': 'double' から '_Tp' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(153,26): warning C4244:         with
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(153,26): warning C4244:         [
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(153,26): warning C4244:             _Tp=float
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(153,26): warning C4244:         ]
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(183,23): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(183,20): warning C4244:  '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+  main.cpp
+  steerablepyramid.cpp
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(183,28): warning C4244:  '=': 'double' から '_Tp' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(183,28): warning C4244:         with
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(183,28): warning C4244:         [
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(183,28): warning C4244:             _Tp=float
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\filtergenerator.cpp(183,28): warning C4244:         ]
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(54,14): warning C4244:  '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(186,34): warning C4244:  '+=': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(186,34): warning C4244: C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(256) : warning C4715: 'SteerablePyramid::getBR': 値を返さないコントロール パスがあります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(186,34): warning C4244: C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(240) : warning C4715: 'SteerablePyramid::getALL': 値を返さないコントロール パスがあります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(186,34): warning C4244: C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(273) : warning C4715: 'SteerablePyramid::getLR': 値を返さないコントロール パスがあります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(186,34): warning C4244: C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(298) : warning C4715: 'SteerablePyramid::getHF': 値を返さないコントロール パスがあります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(186,34): warning C4244: C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(317) : warning C4715: 'SteerablePyramid::getLF': 値を返さないコントロール パスがあります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(186,34): warning C4244: C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(336) : warning C4715: 'SteerablePyramid::getBF': 値を返さないコントロール パスがあります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(186,34): warning C4244: C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(355) : warning C4715: 'SteerablePyramid::getOF': 値を返さないコントロール パスがあります。
+  SteerablePyramid.vcxproj -> C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\x64\Debug\SteerablePyramid.exe

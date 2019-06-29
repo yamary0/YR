@@ -167,18 +167,19 @@ void SteerablePyramid::setMag()
 		Mat Mag = abs(BR_s[i] - mean(BR_s[i])[0]);
 		Mag -= mean(Mag)[0];
 
-		BRMag.emplace_back(Mag);
+		MB.emplace_back(Mag);
 	}
 }
-void paste(cv::Mat &dst, cv::Mat src, int x, int y) {
+void paste(Mat &dst, Mat src, int x, int y) 
+{
 
 	int width = src.cols;
 	int height = src.rows;
 
-	cv::Mat roi_dst = dst(cv::Rect(x, y, width, height));
+	Mat roi_dst = dst(Rect(x, y, width, height));
 	src.copyTo(roi_dst);
 }
-Mat SteerablePyramid::getALL(char mode)
+Mat SteerablePyramid::getALL(Domain mode)
 {
 	int col=0, row=0;
 	for (int i = 0; i < N; ++i)
@@ -192,7 +193,7 @@ Mat SteerablePyramid::getALL(char mode)
 	}
 
 	Mat all(row, col, CV_32FC1, Scalar::all(0.5));
-	if (mode == 's')
+	if (mode == S)
 	{
 		row = 0;
 		for (int i = 0; i < N; i++)
@@ -207,7 +208,7 @@ Mat SteerablePyramid::getALL(char mode)
 		}
 		return all;
 	}
-	else if (mode == 'f')
+	else if (mode == F)
 	{
 		row = 0;
 		for (int i = 0; i < N; i++)
@@ -222,7 +223,7 @@ Mat SteerablePyramid::getALL(char mode)
 		}
 		return all;
 	}
-	else if (mode == 'm')
+	else if (mode == M)
 	{
 		row = 0;
 		for (int i = 0; i < N; i++)
@@ -230,128 +231,216 @@ Mat SteerablePyramid::getALL(char mode)
 			for (int j = 0; j < K; j++)
 			{
 				int num = i * K + j;
-				normalize(BRMag[num], BRMag[num], 0.0, 1.0, NORM_MINMAX);
-				paste(all, BRMag[num], j * BRMag[num].cols, row);
+				normalize(MB[num], MB[num], 0.0, 1.0, NORM_MINMAX);
+				paste(all, MB[num], j * MB[num].cols, row);
 			}
-			row += BRMag[i * K].rows;
+			row += MB[i * K].rows;
 		}
 		return all;
 	}
-}
-Mat SteerablePyramid::getBR(int n, int k, char mode)
-{
-	int num = (n-1) * K + (k-1);				//calculate index No.
-	if (mode == 's')
+	else
 	{
-		return BR_s[num];
+		cout << "undefined domain" << endl;
 	}
-	else if (mode == 'f')
+}
+Mat SteerablePyramid::getBR(int n, int k, Domain mode)
+{
+	if (1 <= n && n <= N) 
 	{
-		return BR_f[num];
+		if (1 <= k && k <= K) 
+		{
+			int num = (n - 1) * K + (k - 1);				//calculate index No.
+			if (mode == S)
+			{
+				return BR_s[num];
+			}
+			else if (mode == F)
+			{
+				return BR_f[num];
+			}
+			else
+			{
+				cout << "undefined domain" << endl;
+			}
+		}
+		else
+		{
+			cout << "k is between 1 ` " << K << endl;
+		}
 	}
 	else
 	{
-		cout << "select the mode s or f" << endl;
+		cout << "n is between 1 ` " << N << endl;
 	}
+	return Mat::zeros(100, 100, CV_32FC1);
 }
 
-Mat SteerablePyramid::getLR(int n, char mode)
+Mat SteerablePyramid::getLR(int n, Domain mode)
 {
-	int num = n - 1;
-	if (mode == 's')
+	if (1 <= n && n <= N + 1)
 	{
-		return LR_s[n];
-	}
-	else if (mode == 'f')
-	{
-		return LR_f[n];
+		int num = n - 1;
+		if (mode == S)
+		{
+			return LR_s[n];
+		}
+		else if (mode == F)
+		{
+			return LR_f[n];
+		}
+		else
+		{
+			cout << "undefined domain" << endl;
+		}
 	}
 	else
 	{
-		cout << "select the mode s or f" << endl;
+		cout << "n is between 1 ` " << N+1 << endl;
 	}
+	return Mat::zeros(100, 100, CV_32FC1);
 }
 
-Mat SteerablePyramid::getMag(int n, int k)
+Mat SteerablePyramid::getMB(int n, int k)
 {
-	int num = (n-1) * K + (k-1) ;
-	return BRMag[num];
-}
-
-Mat SteerablePyramid::getHF(int n,char mode)
-{
-	int num = n;				//index No.
-	if (mode == 's')
+	if (1 <= n && n <= N)
 	{
-		return HF_s[num];
-	}
-	else if (mode == 'f')
-	{
-		vector<Mat> ch(2);
-		split(HF_f[num], ch);
-		return ch[0];
+		if (1 <= k && k <= K)
+		{
+			int num = (n-1) * K + (k-1) ;
+			return MB[num];
+		}
+		else
+		{
+			cout << "k is between 1 ` " << K << endl;
+		}
 	}
 	else
 	{
-		cout << "select the mode s or f" << endl;
+		cout << "n is between 1 ` " << N << endl;
 	}
+	return Mat::zeros(100, 100, CV_32FC1);
 }
 
-Mat SteerablePyramid::getLF(int n,char mode)
+Mat SteerablePyramid::getHF(int n,Domain mode)
 {
-	int num = n;				//index No.
-	if (mode == 's')
+	if (1 <= n && n <= N + 1)
 	{
-		return LF_s[num];
-	}
-	else if (mode == 'f')
-	{
-		vector<Mat> ch(2);
-		split(LF_f[num], ch);
-		return ch[0];
+		int num = n;				//index No.
+		if (mode == S)
+		{
+			return HF_s[num];
+		}
+		else if (mode == F)
+		{
+			vector<Mat> ch(2);
+			split(HF_f[num], ch);
+			return ch[0];
+		}
+		else
+		{
+			cout << "undefined domain" << endl;
+		}
 	}
 	else
 	{
-		cout << "select the mode s or f" << endl;
+		cout << "n is between 1 ` " << N + 1 << endl;
 	}
+	return Mat::zeros(100, 100, CV_32FC1);
 }
 
-Mat SteerablePyramid::getBF(int n, int k,char mode)
+Mat SteerablePyramid::getLF(int n,Domain mode)
 {
-	int num = (n - 1) * K + (k - 1);				//index No.
-	if (mode == 's')
+	if (1 <= n && n <= N + 1)
 	{
-		return BF_s[num];
-	}
-	else if (mode == 'f')
-	{
-		vector<Mat> ch(2);
-		split(BF_f[num], ch);
-		return ch[0];
+		int num = n;				//index No.
+		if (mode == S)
+		{
+			return LF_s[num];
+		}
+		else if (mode == F)
+		{
+			vector<Mat> ch(2);
+			split(LF_f[num], ch);
+			return ch[0];
+		}
+		else
+		{
+			cout << "undefined domain" << endl;
+		}
 	}
 	else
 	{
-		cout << "select the mode s or f" << endl;
+		cout << "n is between 1 ` " << N + 1 << endl;
 	}
+	return Mat::zeros(100, 100, CV_32FC1);
 }
 
-Mat SteerablePyramid::getOF(int n, int k,char mode)
+Mat SteerablePyramid::getBF(int n, int k,Domain mode)
 {
-	int num = (n - 1) * K + (k-1);				//index No.
-	if (mode == 's')
+	if (1 <= n && n <= N)
 	{
-		return OF_s[num];
-	}
-	else if (mode == 'f')
-	{
-		vector<Mat> ch(2);
-		split(OF_f[num], ch);
-		return ch[0];
+		if (1 <= k && k <= K)
+		{
+			int num = (n - 1) * K + (k - 1);				//index No.
+			if (mode == S)
+			{
+				return BF_s[num];
+			}
+			else if (mode == F)
+			{
+				vector<Mat> ch(2);
+				split(BF_f[num], ch);
+				return ch[0];
+			}
+			else
+			{
+				cout << "undefined domain" << endl;
+			}
+		}
+		else
+		{
+			cout << "k is between 1 ` " << K << endl;
+		}
 	}
 	else
 	{
-		cout << "select the mode s or f" << endl;
+		cout << "n is between 1 ` " << N << endl;
 	}
+	return Mat::zeros(100, 100, CV_32FC1);
+}
+
+Mat SteerablePyramid::getOF(int n, int k,Domain mode)
+{
+	if (1 <= n && n <= N)
+	{
+		if (1 <= k && k <= K)
+		{
+			int num = (n - 1) * K + (k - 1);				//index No.
+			if (mode == S)
+			{
+				return OF_s[num];
+			}
+			else if (mode == F)
+			{
+				vector<Mat> ch(2);
+				split(OF_f[num], ch);
+				return ch[0];
+			}
+			else
+			{
+				cout << "undefined domain" << endl;
+			}
+		}
+		else
+		{
+			cout << "k is between 1 ` " << K << endl;
+		}
+	}
+	else
+	{
+		cout << "n is between 1 ` " << N << endl;
+	}
+	return Mat::zeros(100, 100, CV_32FC1);
 }
 
 
