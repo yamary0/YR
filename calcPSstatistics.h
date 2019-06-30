@@ -33,10 +33,10 @@ class Marginal {
 
 };
 
-double Spectral(Mat mg);					//Spectral ( mean of Magnitude )
+double calcSpectral(Mat mg);					//Spectral ( mean of Magnitude )
 Mat calcAC(Mat img,int N);					//Linear Position & Energy Position ( Auto-Correlation )
 vector<Mat> calcLS(Mat scl1, Mat scl2);		//Linear Scale ( Rerative Phase )
 
-Mat calcXC_Ori(Mat ori1, Mat ori2);			//Energy Orientation ( Cross-Correlation )
-Mat calcXC_Sca(Mat sca1, Mat sca2);			//Energy Scale ( Cross-Correlation )
+Mat calcEO(Mat ori1, Mat ori2);				//Energy Orientation ( Cross-Correlation )
+Mat calcES(Mat sca1, Mat sca2);				//Energy Scale ( Cross-Correlation )
 

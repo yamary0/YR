@@ -19,7 +19,7 @@ enum Domain
 
 class SteerablePyramid
 {
-	private:
+	public:
 		Mat src_s;							//•ª‰ğ‚·‚é‰æ‘œ(CV_32FC1)
 		Mat src_f;
 		int N;							//ƒXƒP[ƒ‹
@@ -35,9 +35,12 @@ class SteerablePyramid
 		vector<Mat> OF_s, OF_f;			//OrientedFilter
 		vector<Mat> BF_s, BF_f;			//BandpassFilter BF = LF*HF*DF at the same scale
 
-	public:
+	//public:
 		void decompose();
 		void setMag();
+		void subSpacialMean();
+		void subMagnitudeMean();
+		Mat getHR(Domain mode);
 		Mat getALL(Domain mode);
 		Mat getBR(int n, int k,Domain mode);		//get a subband at Scale:n Direction:k 
 		Mat getLR(int n,Domain mode);				//get a subband at Scale:n

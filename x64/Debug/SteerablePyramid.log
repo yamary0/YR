@@ -1,2 +1,4 @@
-﻿  main.cpp
+﻿  steerablepyramid.cpp
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(65,14): warning C4244:  '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\SteerablePyramid\steerablepyramid.cpp(187,60): warning C4244:  '+=': 'double' から 'int' への変換です。データが失われる可能性があります。
   SteerablePyramid.vcxproj -> C:\Users\yamar\Documents\VisualStudio2019\Project\SteerablePyramid\x64\Debug\SteerablePyramid.exe

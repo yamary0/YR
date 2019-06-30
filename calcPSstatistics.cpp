@@ -25,14 +25,14 @@ void Marginal::setMeanVar()
 void Marginal::setSkewKurt()
 {
 	double size = img.cols * img.rows;
-	img = (img - mean)/sqrt(var);
+	Mat temp = (img - mean)/sqrt(var);
 	Mat third, fourth;
 	//skew
-	pow(img, 3, third);
-	skew = sum(third)[0] / size;
+	pow(temp, 3, third);
+	skew = cv::mean(third)[0];
 	//kurt
-	pow(img, 4, fourth);
-	kurt = sum(fourth)[0] / size;
+	pow(temp, 4, fourth);
+	kurt = cv::mean(fourth)[0];
 }
 double Marginal::getMin()
 {
@@ -82,13 +82,12 @@ Marginal::Marginal(Mat src, Mode id)
 	}
 }
 
-double Spectral(Mat mg)
+double calcSpectral(Mat mg)
 {
 	Scalar m, sd;
 	meanStdDev(mg, m,sd);
 	return m[0];
 }
-
 
 //Linear Position & Energy Position
 Mat calcAC(Mat img,int N) 
@@ -146,7 +145,7 @@ vector<Mat> calcLS(Mat scl1, Mat scl2)		//scl1_s,scl2_s
 }
 
 //Energy Orientation
-Mat calcXC_Ori(Mat ori1, Mat ori2)		//input&output: spacial image
+Mat calcEO(Mat ori1, Mat ori2)		//input&output: spacial image
 {
 	Mat XC;
 	XC = ori1.mul(ori2);
@@ -154,7 +153,7 @@ Mat calcXC_Ori(Mat ori1, Mat ori2)		//input&output: spacial image
 }
 
 //Energy Scale
-Mat calcXC_Sca(Mat sca1, Mat sca2)		//sca1_s,sca2_s ,output:spacial image
+Mat calcES(Mat sca1, Mat sca2)		//sca1_s,sca2_s ,output:spacial image
 {
 	//double sca2_f phase
 	resize(sca2, sca2, Size(), 2.0, 2.0,INTER_NEAREST);
