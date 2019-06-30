@@ -1,6 +1,6 @@
 #pragma once
 
-//Šú‘Ò’l
+//calc expectations
 double ex(Mat Statistic);
 
 //Marginal

@@ -26,17 +26,11 @@ void Marginal::setSkewKurt()
 	Mat temp = (img - mean)/sqrt(var);
 	Mat third, fourth;
 	//skew
-<<<<<<< HEAD
 	pow(img, 3, third);
 	skew = cv::mean(third)[0];
 	//kurt
 	pow(img, 4, fourth);
-=======
-	pow(temp, 3, third);
-	skew = cv::mean(third)[0];
-	//kurt
-	pow(temp, 4, fourth);
->>>>>>> calc
+
 	kurt = cv::mean(fourth)[0];
 }
 double Marginal::getMin()
@@ -87,12 +81,10 @@ Marginal::Marginal(Mat src, Mode id)
 	}
 }
 
-<<<<<<< HEAD
+
 //Spectral
-double Spectral(Mat mg)
-=======
 double calcSpectral(Mat mg)
->>>>>>> calc
+
 {
 	return cv::mean(mg)[0];
 }
