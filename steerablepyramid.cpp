@@ -8,6 +8,7 @@ void visual(Mat img, String id)
 	colormap(img, 7);
 	imshow(id, img);
 }
+
  Mat MakeComplexMat(Mat img)
 {
 	Mat ComplexImg;
@@ -49,6 +50,16 @@ void visual(Mat img, String id)
 	 return DS;
  }
 
+ void paste(Mat& dst, Mat src, int x, int y)
+ {
+
+	 int width = src.cols;
+	 int height = src.rows;
+
+	 Mat roi_dst = dst(Rect(x, y, width, height));
+	 src.copyTo(roi_dst);
+ }
+
  void colormap(Mat &img,int n)
  {
 	 n = (float)n;
@@ -64,15 +75,11 @@ void visual(Mat img, String id)
 
 void SteerablePyramid::decompose() 
 {
-	
-
 	//ft(original image) at first
 	//real image(1ch) to complex image(2ch)
-
 	src_f = MakeComplexMat(src_s);
 	int width = src_f.cols;
 	int height = src_f.rows;
-
 	
 	//dft
 	dft(src_f, src_f);
@@ -82,15 +89,11 @@ void SteerablePyramid::decompose()
 	Mat HF0_f = GenerateHF0_f(width, height, width / 4, width / 2);
 	HR0_f = src_f.mul(HF0_f); 
 
-
 	HF_f.emplace_back(HF0_f);
 
-
 	//generate first Lowpass Filter
-
-	Mat LF0_f = GenerateLF0_f(width, height, width / 4, width / 2);
+	Mat LF0_f = GenerateLF0_f(width, height, width / 4, width / 2)/2;
 	Mat LR0_f = src_f.mul(LF0_f); 
-	
 
 	LF_f.emplace_back(LF0_f);
 	LR_f.emplace_back(LR0_f);
@@ -110,12 +113,12 @@ void SteerablePyramid::decompose()
 		for (int k = 0; k < K; ++k)
 		{
 			// generate DF & BF
-			Mat DF = GenerateDF_f(width, height, k, K);
-			Mat BF = HF.mul(DF);								//フィルタリングに使うBF
+			Mat OF = GenerateOF_f(width, height, k, K);
+			Mat BF = HF.mul(OF);								//フィルタリングに使うBF
 			Mat lf = LF_f.back();
-			Mat rBF = BF.mul(lf);				//保存用BF(LF*HF*DF) LFの最後の要素を参照
+			Mat rBF = BF.mul(lf);				//保存用BF(LF*HF*OF) LFの最後の要素を参照
 
-			OF_f.emplace_back(DF);
+			OF_f.emplace_back(OF);
 			BF_f.emplace_back(rBF);
 
 			//apply BF
@@ -129,68 +132,57 @@ void SteerablePyramid::decompose()
 		// apply LF
 		LR = LR.mul(LF);
 
-		//downsampling
-		
+		//downsampling		
 		Mat DS = DownSample(LR, LR.cols / 2, LR.rows / 2);
 		Mat DSF = DownSample(LF, LF.cols / 2, LF.rows / 2);
 
-
 		LR_f.emplace_back(DS);
 		LF_f.emplace_back(DSF);
+	}
 
-	}
 	//fourier to spacial
-	//1 piece
 	HR0_s = f2s(HR0_f);
-	
-	//N+1 pieces
-	for (int i = 0; i < N+1; ++i)
-	{
-		LR_s.emplace_back(f2s(LR_f[i]));
-		LF_s.emplace_back(f2s(LF_f[i]));
-		HF_s.emplace_back(f2s(HF_f[i]));
-	}
-	//N×K pieces
-	for (int i = 0; i < N * K; i++)
-	{
-		BR_s.emplace_back(f2s(BR_f[i]));
-		OF_s.emplace_back(f2s(OF_f[i]));
-		BF_s.emplace_back(f2s(BF_f[i]));
-	}
-	
+	for(Mat x:LR_f)LR_s.emplace_back(f2s(x));
+	for(Mat x:BR_f)BR_s.emplace_back(f2s(x));
+	for(Mat x:HF_f)HF_s.emplace_back(f2s(x));
+	for(Mat x:LF_f)LF_s.emplace_back(f2s(x));
+	for(Mat x:OF_f)OF_s.emplace_back(f2s(x));
+	for(Mat x:BF_f)BF_s.emplace_back(f2s(x));
 }
 
 void SteerablePyramid::setMag()
 {
-	for (int i = 0; i < BR_s.size(); ++i)
-	{
-		Mat Mag = abs(BR_s[i] - mean(BR_s[i])[0]);
-		Mag -= mean(Mag)[0];
+	for (Mat x : BR_s)MB.emplace_back(abs(x));
+}
 
-		MB.emplace_back(Mag);
+void SteerablePyramid::subSpacialMean()
+{
+	HR0_s = (HR0_s - mean(HR0_s)[0]);
+	for (Mat& x : LR_s)x = x - mean(x)[0];
+	for (Mat& x : BR_s)x = x - mean(x)[0];	
+}
+
+void SteerablePyramid::subMagnitudeMean()
+{
+	for (Mat& x : MB)x = x - mean(x)[0];
+}
+
+Mat SteerablePyramid::getHR(Domain mode)
+{
+	if (mode == S)return HR0_s;
+	else if (mode == F)return HR0_f;
+	else
+	{
+		cout << "undefined domain" << endl;
+		return Mat::zeros(100, 100, CV_32FC1);
 	}
 }
-void paste(Mat &dst, Mat src, int x, int y) 
-{
 
-	int width = src.cols;
-	int height = src.rows;
-
-	Mat roi_dst = dst(Rect(x, y, width, height));
-	src.copyTo(roi_dst);
-}
 Mat SteerablePyramid::getALL(Domain mode)
 {
 	int col=0, row=0;
-	for (int i = 0; i < N; ++i)
-	{
-		row += pow(0.5, i) * src_s.rows;
-	}
-	for (int j = 0; j < K; ++j)
-	{
-
-		col += src_s.cols;
-	}
+	for (int i = 0; i < N; ++i)row += pow(0.5, i) * src_s.rows;
+	for (int j = 0; j < K; ++j)col += src_s.cols;
 
 	Mat all(row, col, CV_32FC1, Scalar::all(0.5));
 	if (mode == S)
@@ -241,6 +233,7 @@ Mat SteerablePyramid::getALL(Domain mode)
 	else
 	{
 		cout << "undefined domain" << endl;
+		return Mat::zeros(100, 100, CV_32FC1);
 	}
 }
 Mat SteerablePyramid::getBR(int n, int k, Domain mode)
@@ -282,11 +275,11 @@ Mat SteerablePyramid::getLR(int n, Domain mode)
 		int num = n - 1;
 		if (mode == S)
 		{
-			return LR_s[n];
+			return LR_s[num];
 		}
 		else if (mode == F)
 		{
-			return LR_f[n];
+			return LR_f[num];
 		}
 		else
 		{
@@ -352,7 +345,7 @@ Mat SteerablePyramid::getLF(int n,Domain mode)
 {
 	if (1 <= n && n <= N + 1)
 	{
-		int num = n;				//index No.
+		int num = n-1;				//index No.
 		if (mode == S)
 		{
 			return LF_s[num];
@@ -361,7 +354,7 @@ Mat SteerablePyramid::getLF(int n,Domain mode)
 		{
 			vector<Mat> ch(2);
 			split(LF_f[num], ch);
-			return ch[0];
+			return ch[1];
 		}
 		else
 		{
@@ -390,7 +383,7 @@ Mat SteerablePyramid::getBF(int n, int k,Domain mode)
 			{
 				vector<Mat> ch(2);
 				split(BF_f[num], ch);
-				return ch[0];
+				return ch[1];
 			}
 			else
 			{

@@ -8,4 +8,4 @@ Mat GenerateHF0_f(int width, int height, double x1, double x2);			//to generate 
 Mat GenerateHF_f(int width, int height, double x1, double x2);
 Mat GenerateLF0_f(int width, int height, double x1, double x2);			//to generate first LF(slightely different from other LF)
 Mat GenerateLF_f(int width, int height, double x1, double x2);
-Mat GenerateDF_f(int width, int height, int orientInd, int orientMax);
+Mat GenerateOF_f(int width, int height, int orientInd, int orientMax);

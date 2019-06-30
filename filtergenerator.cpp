@@ -160,9 +160,9 @@ Mat GenerateLF_f(int width, int height, double x1, double x2)
 }
 
 
-Mat GenerateDF_f(int width, int height, int k, int K)
+Mat GenerateOF_f(int width, int height, int k, int K)
 {
-	Mat DF_f = Mat(width, height, CV_32FC1);
+	Mat OF_f = Mat(width, height, CV_32FC1);
 	
 
 	double alpha_K = pow(2.0,(double)K-1)*Factorial(K - 1.0) / sqrt(K * Factorial(2.0 * (K - 1.0)));
@@ -179,13 +179,15 @@ Mat GenerateDF_f(int width, int height, int k, int K)
 				double ttmp;
 				if (abs(theta) < M_PI_2 || abs(theta) > 3 * M_PI_2)
 				ttmp = alpha_K * pow((double)(cos(theta)), (double)(K - 1.0));
-				else ttmp = -alpha_K * pow((double)(cos(theta)), (double)(K - 1.0));
-				DF_f.at<float>(y, x) = ttmp;
+				else ttmp = alpha_K * pow((double)(cos(theta)), (double)(K - 1.0));
+				OF_f.at<float>(y, x) = ttmp;
 			}
 		}
-		DF_f = DF_f/(float)(width * height);
 		
-		Mat planes[] = { DF_f,DF_f };
-		merge(planes, 2, DF_f);
-	return DF_f;
+
+		//normalize(OF_f, OF_f, 0.0, 1.0, NORM_MINMAX);
+		
+		Mat planes[] = { OF_f,OF_f };
+		merge(planes, 2, OF_f);
+	return OF_f;
 }
