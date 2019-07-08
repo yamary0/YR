@@ -5,7 +5,9 @@
 void visual(Mat img, String id)
 {
 	normalize(img, img, 0.0, 1.0, NORM_MINMAX);
-	colormap(img, 7);
+	colormap(img, 9);
+	img.convertTo(img, CV_8U, 255);
+	applyColorMap(img, img, COLORMAP_JET);
 	imshow(id, img);
 }
 

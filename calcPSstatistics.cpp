@@ -112,10 +112,11 @@ Mat calcAC(Mat img,int N)
 }
 
 //Linear Scale
-vector<Mat> calcLS(Mat scl1, Mat scl2)		//scl1_s,scl2_s
+vector<Mat> calcLS(Mat scl1, Mat scl2)		//scl1_f,scl2_f
 {
 	resize(scl2, scl2, Size(), 2.0, 2.0,INTER_NEAREST);
 
+	
 	scl1 = MakeComplexMat(scl1);
 	scl2 = MakeComplexMat(scl2);
 
@@ -126,7 +127,7 @@ vector<Mat> calcLS(Mat scl1, Mat scl2)		//scl1_s,scl2_s
 	vector<Mat> ch1, ch2;
 	split(scl1, ch1);
 	split(scl2, ch2);
-
+	/*
 	vector<Mat> im(3);
 	im[0] =abs(ch1[0]);
 	im[1] =abs(ch2[0]);
@@ -135,6 +136,7 @@ vector<Mat> calcLS(Mat scl1, Mat scl2)		//scl1_s,scl2_s
 	{
 		visual(im[i], "fourier "+to_string(i));
 	}
+	*/
 
 	Mat Rrp, Irp;
 	Rrp = ch1[0].mul(ch2[0]);				//fine_r*curse_r
